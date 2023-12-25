@@ -1,6 +1,6 @@
-# Llama2-Shepherd 
+# llama2-shepherd 
 
-Llama Shepherd is a command-line tool designed to manage multiple versions of llama inference implementations. It simplifies the process of discovering, selecting, and cloning llama-related projects hosted on various platforms.
+**Llama Shepherd** is a command-line tool meticulously crafted to streamline the management of multiple versions of llama inference implementations. Originating from the groundbreaking [llama2.c project](https://github.com/karpathy/llama2.c) by Andrej Karpathy, Llama Shepherd extends support to diverse languages and platforms, making it a versatile solution for llama enthusiasts.
 
 
 | #    | Language     | Name                       | Github                                                | Author          |
