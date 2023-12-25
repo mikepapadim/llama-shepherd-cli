@@ -25,6 +25,7 @@ options = {
     # Add other language categories and options here
     "C++": [
         {"name": "llama2.cpp", "url": "https://github.com/leloykun/llama2.cpp", "author": "@leloykun"},
+        {"name": "llama2.cpp", "url": "https://github.com/coldlarry/llama2.cpp", "author": "@coldlarry"},
         # Add other C++ options here
     ],
     "JavaScript": [
@@ -51,6 +52,8 @@ options = {
     "Java": [
         {"name": "llama2.java", "url": "https://github.com/mukel/llama2.java", "author": "@mukel"},
         {"name": "llama2.tornadovm.java", "url": "https://github.com/mikepapadim/llama2.tornadovm.java", "author": "@mikepapadim"},
+        {"name": "Jlama", "url": "https://github.com/tjake/Jlama", "author": "@tjake"},
+        {"name": "llama2j", "url": "https://github.com/LastBotInc/llama2j", "author": "@lasttero"},
         # Add other Java options here
     ],
     "Kotlin": [
