@@ -1,61 +1,28 @@
 import sys
 import os
-
-# Import the config module
-import config
 from tabulate import tabulate  # Import the tabulate module
-
+import config
 
 # Access the 'options' dictionary from the config module
 llamas = config.options
 
 
-# def display_options():
-#     print("Choose a category:")
-#     for i, category in enumerate(llamas.keys(), start=1):
-#         print(f"{i}. {category}")
-
-# def display_options():
-#     headers = ["Category", "Name", "URL", "Author"]  # Define headers for the table
-#     table_data = []  # Initialize an empty list to store table rows
-#
-#     for category, options in llamas.items():
-#         for option in options:
-#             row = [category, option["name"], option["url"], option["author"]]
-#             table_data.append(row)
-#
-#     # Use tabulate to format the table
-#     table = tabulate(table_data, headers=headers, tablefmt="grid")
-#
-#     # Print the formatted table
-#     print(table)
-
-# def choose_category():
-#     display_options()
-#     while True:
-#         try:
-#             choice = int(input("Enter the number of your choice: "))
-#             if 1 <= choice <= len(llamas):
-#                 return list(llamas.keys())[choice - 1]
-#             else:
-#                 print("Invalid choice. Please enter a number between 1 and", len(llamas))
-#         except ValueError:
-#             print("Invalid input. Please enter a number.")
-
 def display_options(category=None):
-    headers = ["#", "Category", "Name", "URL", "Author"]
+    headers = ["#", "Language", "Name", "Github", "Author"]
     table_data = []
+    global_index = 1  # Initialize a global index
 
     for cat, options in llamas.items():
         if category and cat.lower() != category.lower():
             continue
 
         category_rows = []
-        for idx, option in enumerate(options, start=1):
+        for option in options:
             # Check if "author" key exists in the option dictionary
             author = option.get("author", "N/A")
-            row = [f"{idx}.", cat, option["name"], option["url"], author]
+            row = [f"{global_index}.", cat, option["name"], option["url"], author]
             category_rows.append(row)
+            global_index += 1  # Increment the global index
 
         # Add an empty row as a separator between categories
         if table_data:
@@ -70,6 +37,7 @@ def display_options(category=None):
     # Print the formatted table
     print(table)
 
+
 def choose_category():
     display_options()
     while True:
@@ -81,6 +49,8 @@ def choose_category():
                 print("Invalid choice. Please enter a number between 0 and", len(llamas))
         except ValueError:
             print("Invalid input. Please enter a number.")
+
+
 def choose_option(category):
     category_options = llamas[category]
     print(f"\nChoose an option from the {category} category:")
@@ -96,17 +66,6 @@ def choose_option(category):
         except ValueError:
             print("Invalid input. Please enter a number.")
 
-# def main():
-#     selected_category = choose_category()
-#     selected_option = choose_option(selected_category)
-#
-#     print("\nYou selected:")
-#     print(f"Name: {selected_option['name']}")
-#     print(f"URL: {selected_option['url']}")
-#     print(f"Author: {selected_option['author']}")
-#
-# if __name__ == "__main__":
-#     main()
 
 def main():
     if len(sys.argv) == 1:
@@ -118,6 +77,7 @@ def main():
         display_options(category)
     else:
         print("Invalid command. Use 'list' to display options for a specific category.")
+
 
 if __name__ == "__main__":
     main()
