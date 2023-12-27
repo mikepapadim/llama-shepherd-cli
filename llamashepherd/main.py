@@ -39,14 +39,19 @@ def display_options(category=None, language=None):
         table_data.extend(category_rows)
 
     # Use tabulate to format the table without grid lines
-    table = tabulate(table_data, headers=headers, tablefmt="plain")
+    table = tabulate(table_data, headers=headers, tablefmt="pipe")
 
     # Print the formatted table
+    print_table(table)
+
+
+def print_table(table):
+    print("\n" + "-" * 121 + "\n")
     print(table)
+    print("\n" + "-" * 121 + "\n")
 
 
-
-def choose_category():
+def choose_implemenation():
     display_options()
     while True:
         try:
@@ -85,12 +90,13 @@ def clone_repository(url, destination):
         print(f"Error cloning repository: {e}")
 
 
-
 def list_action(language=None):
     display_options(language)
+
+
 def interactive_action(default_llama_shepherd_path):
     while True:
-        category = choose_category()
+        category = choose_implemenation()
         if category is None:
             break  # Exit the program if the user chooses to exit
 
@@ -108,7 +114,8 @@ def interactive_action(default_llama_shepherd_path):
 
         # Ask whether to initialize or exit
         while True:
-            user_input = input("Do you want to download and config Tokenizer and TinyLLamas? (y/n, 0 to exit): ").lower()
+            user_input = input(
+                "Do you want to download and config Tokenizer and/or TinyLLama models? (y/n, 0 to exit): ").lower()
             if user_input == 'y':
                 initialize_action()
                 break
@@ -116,7 +123,6 @@ def interactive_action(default_llama_shepherd_path):
                 sys.exit()
             else:
                 print("Invalid input. Please enter 'y', 'n', or '0'.")
-
 
 
 def initialize_action():
@@ -158,6 +164,6 @@ def main():
     elif args.action == "--help":
         parser.print_help()
 
+
 if __name__ == "__main__":
     main()
-
