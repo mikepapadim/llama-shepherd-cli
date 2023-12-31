@@ -6,7 +6,7 @@ setup(
     packages=find_packages(),
     entry_points={
         'console_scripts': [
-            'llamashepherd = main:main',
+            'llamashepherd = llamashepherd.main:main',
         ],
     },
 )
