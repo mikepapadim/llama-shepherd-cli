@@ -2,7 +2,6 @@
 
 **Llama Shepherd** is a command-line tool for quickly managing and experimenting with multiple versions of llama inference implementations. Originating from [llama2.c project](https://github.com/karpathy/llama2.c) by Andrej Karpathy.
 
-
 -------------------------------------------------------------------------------------------------------------------------
 
 | #   | Language    | Name                     | Github                                               | Author          |
@@ -70,6 +69,7 @@
 -------------------------------------------------------------------------------------------------------------------------
 
 # How to use:
+![lshep](https://github.com/mikepapadim/llama-shepherd-cli/assets/8652854/a9729886-487a-4f10-a413-09e3d64329b0)
 
 ## List Available Llama Options
 
