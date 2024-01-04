@@ -5,8 +5,6 @@ import os
 import subprocess
 import argparse
 import wget
-
-
 from tabulate import tabulate
 import config
 import model_config
@@ -16,6 +14,12 @@ llamas = config.options
 
 
 def display_options(category=None, language=None):
+    """Display llama options in a tabular format.
+
+    Args:
+        category (str, optional): Filter options by category. Defaults to None.
+        language (str, optional): Filter options by language. Defaults to None.
+    """
     headers = ["#", "Language", "Name", "Github", "Author"]
     table_data = []
     global_index = 1  # Initialize a global index
@@ -50,12 +54,23 @@ def display_options(category=None, language=None):
 
 
 def print_table(table):
+    """Print a formatted table.
+
+    Args:
+        table (str): Formatted table to print.
+    """
     print("\n" + "-" * 121 + "\n")
     print(table)
     print("\n" + "-" * 121 + "\n")
 
 
 def clone_repository(url, destination):
+    """Clone a Git repository.
+
+    Args:
+        url (str): URL of the Git repository.
+        destination (str): Destination directory for cloning.
+    """
     try:
         subprocess.run(["git", "clone", url, destination], check=True)
         print(f"Repository cloned successfully to {destination}")
@@ -64,31 +79,20 @@ def clone_repository(url, destination):
 
 
 def list_action(language=None):
+    """List llama options based on the specified language.
+
+    Args:
+        language (str, optional): Language to filter llama options. Defaults to None.
+    """
     display_options(language)
 
 
-def choose_implementation():
-    display_options()
-    while True:
-        try:
-            choice = int(input("Enter the number of your choice (0 to exit): "))
-            if 0 <= choice <= len(llamas):
-                selected_category = (
-                    None if choice == 0 else list(llamas.keys())[choice - 1]
-                )
-                return choice, selected_category
-            else:
-                print(
-                    "Invalid choice. Please enter a number between 0 and", len(llamas)
-                )
-        except ValueError:
-            print("Invalid input. Please enter a number.")
-
-
-# ...
-
-
 def choose_option():
+    """Prompt the user to choose a llama option.
+
+    Returns:
+        dict or None: The selected llama option or None if the user chose to go back.
+    """
     all_options = [option for options in llamas.values() for option in options]
     total_options = len(all_options)
 
@@ -108,19 +112,30 @@ def choose_option():
 
 
 def get_language_for_option(options_dict, selected_option):
+    """Get the language associated with a selected llama option.
+
+    Args:
+        options_dict (dict): Dictionary of llama options.
+        selected_option (dict): Selected llama option.
+
+    Returns:
+        str or None: Language associated with the selected option or None if not found.
+    """
     for language, options_list in options_dict.items():
         for option in options_list:
             if option == selected_option:
                 return language
-    return (
-        None  # Return None if the selected option is not found in any language category
-    )
+    return None  # Return None if the selected option is not found in any language category
 
 
 def interactive_action(default_llama_shepherd_path):
+    """Perform interactive actions for choosing and cloning llama options.
+
+    Args:
+        default_llama_shepherd_path (str): Default path for llama shepherd.
+    """
     display_options()
     while True:
-
         selected_option = choose_option()
         selected_category = get_language_for_option(llamas, selected_option)
 
@@ -154,6 +169,11 @@ def interactive_action(default_llama_shepherd_path):
 
 
 def initialize_action(default_llama_shepherd_path):
+    """Initialize llama models based on user input.
+
+    Args:
+        default_llama_shepherd_path (str): Default path for llama shepherd.
+    """
     print("Initializing models...")
 
     while True:
@@ -204,6 +224,13 @@ def initialize_action(default_llama_shepherd_path):
 
 
 def download_and_configure_model(model_name, model_url, destination_directory):
+    """Download and configure a llama model.
+
+    Args:
+        model_name (str): Name of the llama model.
+        model_url (str): URL of the llama model.
+        destination_directory (str): Destination directory for the llama model.
+    """
     print(f"Downloading and configuring {model_name} model from: {model_url}")
 
     # Ensure the models directory exists
@@ -225,6 +252,7 @@ def download_and_configure_model(model_name, model_url, destination_directory):
 
 
 def main():
+    """Main function to handle llama shepherd CLI operations."""
     home_directory = os.path.expanduser("~")
     default_llama_shepherd_path = os.path.join(home_directory, "llama-shepherd")
 
