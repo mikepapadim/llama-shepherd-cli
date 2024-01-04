@@ -71,6 +71,29 @@
 
 # How to use:
 
+## List Available Llama Options
+
+To list available llama options, use the following command:
+
+```bash
+python3 llamashepherd/main.py list [Optional][LANGUAGE]
+```
+Replace [LANGUAGE] with the desired language to filter options. If not specified, all options will be displayed.
+
+## Interactively Install Llama Options
+
+To interactively install llama options, use the following command:
+```bash
+python3 llamashepherd/main.py install 
+```
+## Initialize TinyLlamas Models
+
+To initialize llama models, use the following command:
+```bash
+python3 llamashepherd/main.py models 
+```
+This command allows you to download and configure the Tokenizer and/or TinyLLama models.
+
 
 # License
 This project is licensed under the MIT License - see the LICENSE file for details.
